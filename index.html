@@ -1,803 +1,787 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <title>Lab Crew – Short-Term Lab Technicians On Demand</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Lab Crew connects labs with verified lab technicians for short-term cover from 1 day to 30 days."
+  />
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.1);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --danger: #f97373;
+      --radius-xl: 18px;
+      --radius-lg: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #a855f7, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px #22c55e;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      margin: 0 0 12px;
+      line-height: 1.15;
+    }
+
+    .hero h1 span {
+      color: #a5b4fc;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: transform 0.1s ease, box-shadow 0.1s ease,
+        background 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      box-shadow: 0 14px 35px rgba(56, 189, 248, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 45px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, #111827 0, #020617 60%);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #c7d2fe;
+      border: 1px solid rgba(129, 140, 248, 0.5);
+    }
+
+    .stats {
+      display: flex;
+      gap: 14px;
+      margin: 8px 0 4px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .mini-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: #c7d2fe;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mini-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 14px 14px 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .card p {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      margin: 30px 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .three-cols {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      border-radius: var(--radius-lg);
+      padding: 12px 12px 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .step-num {
+      font-size: 11px;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .step h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .pill-list span {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--muted);
+    }
+
+    .faq {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .faq q {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .faq p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .form-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 14px 14px 16px;
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .form-card label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
+      color: var(--text);
+      padding: 8px 9px;
+      font-size: 12px;
+      margin-bottom: 8px;
+      outline: none;
+    }
+
+    .form-card input:focus,
+    .form-card select:focus,
+    .form-card textarea:focus {
+      border-color: #6366f1;
+    }
+
+    .form-helper {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+      .three-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .split {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-ctas {
+        flex-direction: column;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Lab Crew – Short-Term Lab Technicians On Demand&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta</p>
-<p class="p1"><span class="Apple-converted-space">    </span>name="description"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>content="Lab Crew connects labs with verified lab technicians for short-term cover from 1 day to 30 days."</p>
-<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg: #050816;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg-alt: #0b1020;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent: #4f46e5;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent-soft: rgba(79, 70, 229, 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text: #f9fafb;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--muted: #9ca3af;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--border: #1f2933;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--danger: #f97373;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--radius-xl: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--radius-lg: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",</p>
-<p class="p1"><span class="Apple-converted-space">        </span>sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>a {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: inherit;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.page {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 1100px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 32px 16px 60px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 32px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.logo {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.logo-mark {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 32px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 32px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at 30% 20%, #a855f7, #4f46e5);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.logo-text {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 0.03em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.badge {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 4px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(148, 163, 184, 0.4);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.7);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.badge-dot {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #22c55e;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 0 12px #22c55e;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 36px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: clamp(28px, 4vw, 36px);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.15;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero h1 span {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #a5b4fc;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-sub {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 520px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-ctas {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: transform 0.1s ease, box-shadow 0.1s ease,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>background 0.15s ease, color 0.15s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn-primary {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #4f46e5, #7c3aed);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 14px 35px rgba(56, 189, 248, 0.35);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn-primary:hover {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: translateY(-1px);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 18px 45px rgba(37, 99, 235, 0.5);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn-secondary {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(148, 163, 184, 0.45);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.btn-secondary:hover {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 1);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transform: translateY(-1px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-meta {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.pill {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 4px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(148, 163, 184, 0.4);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.7);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius-xl);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at top, #111827 0, #020617 60%);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(148, 163, 184, 0.3);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 18px 18px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow-soft);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-card-header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-card-title {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-tag {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 4px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--accent-soft);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #c7d2fe;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(129, 140, 248, 0.5);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stats {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 8px 0 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat strong {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.mini-badge {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 3px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(129, 140, 248, 0.4);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.8);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #c7d2fe;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.mini-dot {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #22c55e;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.columns {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius-lg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(31, 41, 55, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 14px 14px 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card h3 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card ul {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-left: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.section-title {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 30px 0 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.section-sub {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 640px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.three-cols {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(3, minmax(0, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.step {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius-lg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 12px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(31, 41, 55, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.step-num {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #a5b4fc;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 0.08em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.step h4 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 0 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.step p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.split {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 22px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.pill-list {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.pill-list span {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 4px 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(55, 65, 81, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.faq {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius-lg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(31, 41, 55, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.faq q {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.faq p {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius-lg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(31, 41, 55, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 14px 14px 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(15, 23, 42, 0.95);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card label {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #e5e7eb;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card input,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card select,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card textarea {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(55, 65, 81, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #020617;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 9px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>outline: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card input:focus,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card select:focus,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-card textarea:focus {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-color: #6366f1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-helper {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>footer {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-top: 1px solid rgba(31, 41, 55, 0.9);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 860px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>grid-template-columns: minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero-card {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>order: -1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.three-cols {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>grid-template-columns: minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.split {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>grid-template-columns: minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.columns {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>grid-template-columns: minmax(0, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 540px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero-ctas {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>align-items: flex-start;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="page"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="logo"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="logo-mark"&gt;LC&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="logo-text"&gt;Lab Crew&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="display:flex; gap:8px; flex-wrap:wrap;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#labs" class="pill"&gt;For Labs&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#techs" class="pill"&gt;For Technicians&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section class="hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="badge"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="badge-dot"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;Launching in New Delhi • Bengaluru • Hyderabad&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Short-Term &lt;span&gt;Lab Technicians&lt;/span&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>From 1 Day to 30 Days</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="hero-sub"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Lab Crew connects diagnostics and research labs with verified lab</p>
-<p class="p1"><span class="Apple-converted-space">          </span>technicians for short-term cover. No long hiring cycles, no panic</p>
-<p class="p1"><span class="Apple-converted-space">          </span>calls. Just the right person, when you need them.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-ctas"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;a href="#lab-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn btn-primary"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>Request a Technician</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;a href="#tech-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn btn-secondary"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>Join as a Technician</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-meta"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="pill"&gt;Built for India’s diagnostics ecosystem&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="pill"&gt;Short-term cover • Full-time hiring later&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hero-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-card-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="hero-card-title"&gt;On-Demand Lab Staffing&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="hero-tag"&gt;Labs ↔ Technicians&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size:12px; color:var(--muted); margin:0;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>A marketplace where labs request short-term cover and technicians</p>
-<p class="p1"><span class="Apple-converted-space">          </span>pick shifts that match their skills, instruments and location.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stats"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;1–30 days&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Cover any gap from one shift to one month.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Verified talent&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Identity, education and experience checked.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="mini-badge"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="mini-dot"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Early access for pilot labs and technicians</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- LAB SIDE --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="labs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 class="section-title"&gt;For Labs: No More Staffing Panic&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="section-sub"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>When a technician calls in sick, quits suddenly, or workload spikes,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>your lab still has to deliver. Lab Crew gives you a dependable way to</p>
-<p class="p1"><span class="Apple-converted-space">        </span>plug that gap with verified, skill-matched technicians.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="columns"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;The Problem&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Labs across India face repeated short-term shortages: last-minute</p>
-<p class="p1"><span class="Apple-converted-space">            </span>sick leave, sudden resignations, seasonal test spikes and</p>
-<p class="p1"><span class="Apple-converted-space">            </span>machine-specific skill gaps.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Delayed reports and turn-around time issues&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Stressed, overworked core team&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Informal, unverified temporary staff&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Quality and compliance risks&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;The Solution&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>A simple way to request a technician for a day, a week or a month,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>with transparent skill matching and one consolidated invoice.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Short-term cover from 1 day to 30 days&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Technicians matched by department and instruments&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Verified profiles and ratings from other labs&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Lab Crew handles payouts and documentation&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h3 class="section-title" style="margin-top:24px;"&gt;How It Works for Labs&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="three-cols"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="step-num"&gt;Step 1&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h4&gt;Tell us what you need&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Share your dates, shift timings, department and instrument needs.</p>
-<p class="p1"><span class="Apple-converted-space">            </span>It takes less than a minute.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="step-num"&gt;Step 2&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h4&gt;We match a technician&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>We match you with verified technicians based on skills, experience,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>rating and distance to your lab.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="step"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="step-num"&gt;Step 3&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h4&gt;Shift completed, one invoice&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Technician attends the shift, you confirm attendance, and pay</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Lab Crew. We handle payouts to the technician.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- TECH SIDE --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="techs"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 class="section-title"&gt;For Technicians: Earn More, On Your Terms&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="section-sub"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>If you are trained in medical laboratory work, you can use Lab Crew to</p>
-<p class="p1"><span class="Apple-converted-space">        </span>pick up extra shifts, work flexibly and grow your experience in</p>
-<p class="p1"><span class="Apple-converted-space">        </span>diagnostics and research labs.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="split"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;What You Get&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Lab Crew connects you with labs that need short-term help. You</p>
-<p class="p1"><span class="Apple-converted-space">            </span>choose which shifts you want to accept, and you get paid weekly.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Short-term shifts and mini-contracts&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Extra income on top of your main job&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Exposure to different laboratories and instruments&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Clear, on-time payouts with no middlemen&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="pill-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Biochemistry&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Hematology&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Microbiology&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Molecular / PCR&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Phlebotomy&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Sample processing&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;How It Works for Technicians&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;1. Create your profile&lt;/strong&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Add your education, experience, departments and instruments you</p>
-<p class="p1"><span class="Apple-converted-space">            </span>know.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;2. Get verified&lt;/strong&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>We review your documents and may speak with you briefly to confirm</p>
-<p class="p1"><span class="Apple-converted-space">            </span>your background.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;3. Accept shifts that suit you&lt;/strong&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Choose shifts by time, location and pay. No pressure to take</p>
-<p class="p1"><span class="Apple-converted-space">            </span>everything.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;&lt;strong&gt;4. Get paid weekly&lt;/strong&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Lab Crew pays you on a regular schedule after labs confirm your</p>
-<p class="p1"><span class="Apple-converted-space">            </span>attendance.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- FORMS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="lab-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 class="section-title"&gt;Request a Technician (Labs)&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="section-sub"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Share a few details and we will contact you to understand your</p>
-<p class="p1"><span class="Apple-converted-space">        </span>staffing needs and city coverage. During the pilot, responses may be</p>
-<p class="p1"><span class="Apple-converted-space">        </span>limited to selected cities.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="form-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!--</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Replace the "action" below with your own form handler later</p>
-<p class="p1"><span class="Apple-converted-space">          </span>(for example a Google Form link or form service).</p>
-<p class="p1"><span class="Apple-converted-space">        </span>--&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;form action="mailto:your-email@example.com" method="post" enctype="text/plain"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Lab name&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="lab_name" placeholder="Example: ABC Diagnostics, New Delhi" required /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;City&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="city" placeholder="City" required /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Contact person&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="contact_person" placeholder="Name of decision maker" /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Email&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="email" name="email" placeholder="you@lab.com" required /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Phone number&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="phone" placeholder="+91 ..." /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;What do you need help with?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea name="need" rows="3" placeholder="Example: 7 days cover for hematology technician, familiar with Sysmex and biochemistry analyser." &gt;&lt;/textarea&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="form-helper"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>This form will open your email app. You can also just copy these fields and email us directly.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-primary" type="submit"&gt;Submit Request&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="tech-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 class="section-title"&gt;Register as a Technician&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="section-sub"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>If you are a trained lab technician and want flexible, short-term work,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>share your details and we will reach out when we open in your city.</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="form-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;form action="mailto:your-email@example.com" method="post" enctype="text/plain"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Your name&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="name" placeholder="Full name" required /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;City&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="city" placeholder="Current city" required /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Education / qualification&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="qualification" placeholder="DMLT / BMLT / BSc / MSc etc." /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Experience (years)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="number" name="experience" min="0" max="40" /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Main departments&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="departments" placeholder="Biochemistry, hematology, microbiology..." /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Instruments you have used&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;textarea name="instruments" rows="3" placeholder="Example: Sysmex, Cobas, Architect, Mindray, Bio-Rad, etc."&gt;&lt;/textarea&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Email&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="email" name="email" placeholder="you@example.com" required /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Phone number&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" name="phone" placeholder="+91 ..." /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="form-helper"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>This will open your email app with the details. You can also send us these details manually by email or WhatsApp.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn btn-secondary" type="submit"&gt;Send My Details&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- FAQ --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 class="section-title"&gt;Frequently Asked Questions&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="faq"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;q&gt;How fast can you provide a technician?&lt;/q&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>During the pilot, this will depend on the city and the type of</p>
-<p class="p1"><span class="Apple-converted-space">          </span>technician you need. The long-term goal is to match labs within a</p>
-<p class="p1"><span class="Apple-converted-space">          </span>few hours in major cities.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="faq"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;q&gt;Which cities are you focusing on first?&lt;/q&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>We are starting with New Delhi, Bengaluru and Hyderabad, and will</p>
-<p class="p1"><span class="Apple-converted-space">          </span>expand based on demand from labs and technicians.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="faq"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;q&gt;Do technicians pay any registration fee?&lt;/q&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>No. During the early stages, registration for technicians is free.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="faq"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;q&gt;Can we also hire full-time technicians through Lab Crew?&lt;/q&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Yes. Short-term cover is the priority, but we can also support full-time</p>
-<p class="p1"><span class="Apple-converted-space">          </span>hiring and will share more when we speak with you.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;© 2025 Lab Crew – Short-term lab staffing marketplace&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Contact: your-email@example.com&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">LC</div>
+        <div class="logo-text">Lab Crew</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <a href="#labs" class="pill">For Labs</a>
+        <a href="#techs" class="pill">For Technicians</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Launching in New Delhi • Bengaluru • Hyderabad</span>
+        </div>
+        <h1>
+          Short-Term <span>Lab Technicians</span><br />
+          From 1 Day to 30 Days
+        </h1>
+        <p class="hero-sub">
+          Lab Crew connects diagnostics and research labs with verified lab
+          technicians for short-term cover. No long hiring cycles, no panic
+          calls. Just the right person, when you need them.
+        </p>
+        <div class="hero-ctas">
+          <a href="#lab-form">
+            <button class="btn btn-primary">
+              Request a Technician
+            </button>
+          </a>
+          <a href="#tech-form">
+            <button class="btn btn-secondary">
+              Join as a Technician
+            </button>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span class="pill">Built for India’s diagnostics ecosystem</span>
+          <span class="pill">Short-term cover • Full-time hiring later</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-title">On-Demand Lab Staffing</div>
+          <div class="hero-tag">Labs ↔ Technicians</div>
+        </div>
+        <p style="font-size:12px; color:var(--muted); margin:0;">
+          A marketplace where labs request short-term cover and technicians
+          pick shifts that match their skills, instruments and location.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>1–30 days</strong>
+            Cover any gap from one shift to one month.
+          </div>
+          <div class="stat">
+            <strong>Verified talent</strong>
+            Identity, education and experience checked.
+          </div>
+        </div>
+
+        <div class="mini-badge">
+          <span class="mini-dot"></span>
+          Early access for pilot labs and technicians
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB SIDE -->
+    <section id="labs">
+      <h2 class="section-title">For Labs: No More Staffing Panic</h2>
+      <p class="section-sub">
+        When a technician calls in sick, quits suddenly, or workload spikes,
+        your lab still has to deliver. Lab Crew gives you a dependable way to
+        plug that gap with verified, skill-matched technicians.
+      </p>
+
+      <div class="columns">
+        <div class="card">
+          <h3>The Problem</h3>
+          <p>
+            Labs across India face repeated short-term shortages: last-minute
+            sick leave, sudden resignations, seasonal test spikes and
+            machine-specific skill gaps.
+          </p>
+          <ul>
+            <li>Delayed reports and turn-around time issues</li>
+            <li>Stressed, overworked core team</li>
+            <li>Informal, unverified temporary staff</li>
+            <li>Quality and compliance risks</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>The Solution</h3>
+          <p>
+            A simple way to request a technician for a day, a week or a month,
+            with transparent skill matching and one consolidated invoice.
+          </p>
+          <ul>
+            <li>Short-term cover from 1 day to 30 days</li>
+            <li>Technicians matched by department and instruments</li>
+            <li>Verified profiles and ratings from other labs</li>
+            <li>Lab Crew handles payouts and documentation</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="section-title" style="margin-top:24px;">How It Works for Labs</h3>
+      <div class="three-cols">
+        <div class="step">
+          <div class="step-num">Step 1</div>
+          <h4>Tell us what you need</h4>
+          <p>
+            Share your dates, shift timings, department and instrument needs.
+            It takes less than a minute.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 2</div>
+          <h4>We match a technician</h4>
+          <p>
+            We match you with verified technicians based on skills, experience,
+            rating and distance to your lab.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 3</div>
+          <h4>Shift completed, one invoice</h4>
+          <p>
+            Technician attends the shift, you confirm attendance, and pay
+            Lab Crew. We handle payouts to the technician.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH SIDE -->
+    <section id="techs">
+      <h2 class="section-title">For Technicians: Earn More, On Your Terms</h2>
+      <p class="section-sub">
+        If you are trained in medical laboratory work, you can use Lab Crew to
+        pick up extra shifts, work flexibly and grow your experience in
+        diagnostics and research labs.
+      </p>
+
+      <div class="split">
+        <div class="card">
+          <h3>What You Get</h3>
+          <p>
+            Lab Crew connects you with labs that need short-term help. You
+            choose which shifts you want to accept, and you get paid weekly.
+          </p>
+          <ul>
+            <li>Short-term shifts and mini-contracts</li>
+            <li>Extra income on top of your main job</li>
+            <li>Exposure to different laboratories and instruments</li>
+            <li>Clear, on-time payouts with no middlemen</li>
+          </ul>
+          <div class="pill-list">
+            <span>Biochemistry</span>
+            <span>Hematology</span>
+            <span>Microbiology</span>
+            <span>Molecular / PCR</span>
+            <span>Phlebotomy</span>
+            <span>Sample processing</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>How It Works for Technicians</h3>
+          <p><strong>1. Create your profile</strong><br />
+            Add your education, experience, departments and instruments you
+            know.
+          </p>
+          <p><strong>2. Get verified</strong><br />
+            We review your documents and may speak with you briefly to confirm
+            your background.
+          </p>
+          <p><strong>3. Accept shifts that suit you</strong><br />
+            Choose shifts by time, location and pay. No pressure to take
+            everything.
+          </p>
+          <p><strong>4. Get paid weekly</strong><br />
+            Lab Crew pays you on a regular schedule after labs confirm your
+            attendance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section id="lab-form">
+      <h2 class="section-title">Request a Technician (Labs)</h2>
+      <p class="section-sub">
+        Share a few details and we will contact you to understand your
+        staffing needs and city coverage. During the pilot, responses may be
+        limited to selected cities.
+      </p>
+
+      <div class="form-card">
+        <!--
+          Replace the "action" below with your own form handler later
+          (for example a Google Form link or form service).
+        -->
+        <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+          <label>Lab name</label>
+          <input type="text" name="lab_name" placeholder="Example: ABC Diagnostics, New Delhi" required />
+
+          <label>City</label>
+          <input type="text" name="city" placeholder="City" required />
+
+          <label>Contact person</label>
+          <input type="text" name="contact_person" placeholder="Name of decision maker" />
+
+          <label>Email</label>
+          <input type="email" name="email" placeholder="you@lab.com" required />
+
+          <label>Phone number</label>
+          <input type="text" name="phone" placeholder="+91 ..." />
+
+          <label>What do you need help with?</label>
+          <textarea name="need" rows="3" placeholder="Example: 7 days cover for hematology technician, familiar with Sysmex and biochemistry analyser." ></textarea>
+
+          <div class="form-helper">
+            This form will open your email app. You can also just copy these fields and email us directly.
+          </div>
+
+          <button class="btn btn-primary" type="submit">Submit Request</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="tech-form">
+      <h2 class="section-title">Register as a Technician</h2>
+      <p class="section-sub">
+        If you are a trained lab technician and want flexible, short-term work,
+        share your details and we will reach out when we open in your city.
+      </p>
+
+      <div class="form-card">
+        <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+          <label>Your name</label>
+          <input type="text" name="name" placeholder="Full name" required />
+
+          <label>City</label>
+          <input type="text" name="city" placeholder="Current city" required />
+
+          <label>Education / qualification</label>
+          <input type="text" name="qualification" placeholder="DMLT / BMLT / BSc / MSc etc." />
+
+          <label>Experience (years)</label>
+          <input type="number" name="experience" min="0" max="40" />
+
+          <label>Main departments</label>
+          <input type="text" name="departments" placeholder="Biochemistry, hematology, microbiology..." />
+
+          <label>Instruments you have used</label>
+          <textarea name="instruments" rows="3" placeholder="Example: Sysmex, Cobas, Architect, Mindray, Bio-Rad, etc."></textarea>
+
+          <label>Email</label>
+          <input type="email" name="email" placeholder="you@example.com" required />
+
+          <label>Phone number</label>
+          <input type="text" name="phone" placeholder="+91 ..." />
+
+          <div class="form-helper">
+            This will open your email app with the details. You can also send us these details manually by email or WhatsApp.
+          </div>
+
+          <button class="btn btn-secondary" type="submit">Send My Details</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq">
+        <q>How fast can you provide a technician?</q>
+        <p>
+          During the pilot, this will depend on the city and the type of
+          technician you need. The long-term goal is to match labs within a
+          few hours in major cities.
+        </p>
+      </div>
+
+      <div class="faq">
+        <q>Which cities are you focusing on first?</q>
+        <p>
+          We are starting with New Delhi, Bengaluru and Hyderabad, and will
+          expand based on demand from labs and technicians.
+        </p>
+      </div>
+
+      <div class="faq">
+        <q>Do technicians pay any registration fee?</q>
+        <p>
+          No. During the early stages, registration for technicians is free.
+        </p>
+      </div>
+
+      <div class="faq">
+        <q>Can we also hire full-time technicians through Lab Crew?</q>
+        <p>
+          Yes. Short-term cover is the priority, but we can also support full-time
+          hiring and will share more when we speak with you.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2025 Lab Crew – Short-term lab staffing marketplace</span>
+      <span>Contact: your-email@example.com</span>
+    </footer>
+  </div>
 </body>
 </html>
